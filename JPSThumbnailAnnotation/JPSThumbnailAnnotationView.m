@@ -22,6 +22,7 @@ static CGFloat const kJPSThumbnailAnnotationViewAnimationDuration = 0.25f;
 
 @property (nonatomic, readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *coverView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subtitleLabel;
 @property (nonatomic, strong) ActionBlock disclosureBlock;
@@ -58,13 +59,13 @@ static CGFloat const kJPSThumbnailAnnotationViewAnimationDuration = 0.25f;
     [self setupTitleLabel];
     [self setupSubtitleLabel];
     [self setupDisclosureButton];
-    [self setLayerProperties];
+    [self setupCoverView];
     [self setDetailGroupAlpha:0.0f];
 }
 
 - (void)setupImageView {
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(12.5f, 12.5f, 50.0f, 47.0f)];
-    _imageView.layer.cornerRadius = 4.0f;
+    _imageView.layer.cornerRadius = 20.0f;
     _imageView.layer.masksToBounds = YES;
     _imageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     _imageView.layer.borderWidth = 0.5f;
@@ -118,6 +119,12 @@ static CGFloat const kJPSThumbnailAnnotationViewAnimationDuration = 0.25f;
     _bgLayer.masksToBounds = NO;
     
     [self.layer insertSublayer:_bgLayer atIndex:0];
+}
+
+- (void)setupCoverView {
+    _coverView = [[UIImageView alloc] initWithFrame:CGRectMake(5.f, 4.f, 64.0f, 75.0f)];
+    [_coverView setImage:[UIImage imageNamed:@"map_photo_pin"]];
+    [self addSubview:_coverView];
 }
 
 #pragma mark - Updating
